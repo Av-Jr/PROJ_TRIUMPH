@@ -41,7 +41,7 @@ const exe_qu = (query, cb) => {
 };
 
 
-app.get("/data", (req, res) => {
+app.get("/", (req, res) => {
     exe_qu("SELECT * FROM tr_data", (ERR, RES) => {
         if (ERR) {
             return res.status(500).send("Failed to collect DATA.");
