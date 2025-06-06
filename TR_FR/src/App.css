@@ -1,0 +1,226 @@
+body{
+  background : url("./assets/skyline.jpg") no-repeat;
+  background-size : cover;
+  height : 100vh;
+  margin : 0;
+  overflow : hidden;
+}
+
+.Main_Con{
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  width : 900px;
+  height : 650px;
+  position : absolute;
+  top : 10%;
+  left : 20%;
+  background-color : rgba(255, 255, 255, 0.1);
+  backdrop-filter : blur(5px);
+  border : 1px solid rgba(14, 146, 166, 0.3);
+  border-radius : 12px;
+  padding : 20px;
+  transition : backdrop-filter 1s ease, width 2s ease, opacity 2s ease, visibility 3s ease, transform 3s ease;
+}
+
+#Search_Con{
+  width : 450px;
+  height : 30px;
+  background-color : rgba(255, 255, 255, 0.4);
+  backdrop-filter : blur(30px);
+
+  position : absolute;
+  left : 25%;
+  top : 20%;
+}
+
+#Scroll_Con{
+  position : absolute;
+  bottom : 2%;
+  width : 900px;
+  height : 450px;
+  display : grid;
+  grid-template-columns : 1fr 1fr;
+  gap: 25px;
+  overflow-y : scroll;
+  perspective : 800px;
+
+}
+
+.Cloud_Con{
+  background : url("../src/assets/idea_cloud.gif") no-repeat center;
+  opacity : 0;
+  transition : opacity 1s ease;
+  background-size : contain;
+  width : 150px;
+  height : 150px;
+  position : absolute;
+  left : 62%;
+  top : -2%;
+  z-index : 1000;
+}
+
+.textBox{
+  position : relative;
+  background : transparent;
+  width : 140px;
+  height : 95px;
+  top : 9%;
+  left : 3%;
+  border-radius : 10px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color : black;
+  margin : 10px;
+}
+
+.Data_Obj{
+  position : relative;
+  width : 350px;
+  height : 250px;
+  background-color : rgba(255, 255, 255, 0.2);
+  margin : 5px;
+  left : 42px;
+  border : 3px solid rgba(14, 146, 166, 0.3);
+  border-radius : 12px;
+  overflow : hidden;
+  opacity : 0;
+  transform : translateY(10px);
+  transition : opacity 1s ease, transform 1s ease, perspective 1s ease;
+}
+
+.Data_Obj_Name{
+  position : relative;
+  top : 0;
+  padding : 5px;
+  width : 100%;
+
+}
+
+.Data_Obj_Img{
+  position : relative;
+  background-position : center top -40px;
+  width : 100%;
+  height : 75%;
+  background-size : cover;
+}
+
+.Data_Obj_Img_more{
+  position : absolute;
+  background : no-repeat center;
+  width : 400px;
+  height : 240px;
+  background-size : cover;
+  right : 0;
+  top : 0;
+}
+
+#Search_Con_i {
+  height: 100%;
+  width : 80%;
+  box-sizing: border-box;
+  padding: 0;
+  margin : 0;
+  outline : 0;
+  border: none;
+  background-color : rgba(255, 255, 255, 0.6);
+  backdrop-filter : blur(60px);
+  color : brown;
+}
+
+
+.FadeinDIV{
+  opacity : 1;
+  transform : translateY(0);
+}
+
+.FadeoutDIV{
+  opacity : 0;
+  transform : translateY(10px);
+}
+
+
+
+.Main_Con:hover{
+  backdrop-filter : blur(10px);
+}
+
+.Data_Obj:hover{
+  perspective : 400px;
+  transform : translateZ(40px);
+}
+
+.show{
+  visibility : visible;
+  opacity : 1;
+}
+
+.hide{
+  visibility : hidden;
+  opacity : 0;
+}
+
+.emptyCon{
+  width : 50px;
+  height : 50px;
+  position : absolute;
+  z-index : 1000;
+  transition : width 2s ease, visibility 2s ease, opacity 2s ease, height 2s ease, transform 2s ease;
+  visibility : hidden;
+  opacity: 0;
+  top:10%;
+  left : 40%;
+}
+
+.MC_shrink{
+  width : 20px;
+  overflow : hidden;
+  transform : translateX(-100px);
+  visibility : hidden;
+  opacity : 0
+}
+
+.DI_exp{
+  visibility : visible;
+  opacity : 1;
+  width : 900px;
+  height : 650px;
+  position : absolute;
+  background-color : rgba(255, 255, 255, 0.1);
+  backdrop-filter : blur(5px);
+  border : 1px solid rgba(14, 146, 166, 0.3);
+  border-radius : 12px;
+  padding : 20px;
+  transform : translateX(-250px)
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 20px 2fr;
+  row-gap: 10px;
+  column-gap: 10px;
+  margin-top: 20px;
+  color: black;
+  font-size: 17px;
+  align-items: start;
+  position : relative;
+  top : 30%;
+  left : 20%;
+  backdrop-filter : blur(80px);
+  width : 500px;
+  padding : 20px;
+  background : rgba(255, 255, 255, 0.1);
+  border-radius : 20px;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+}
+
+.label {
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
