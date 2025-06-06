@@ -1,6 +1,6 @@
 function GET_DATA(){
     return(
-        fetch("https://proj-triumph.onrender.com/data")
+        fetch("https://proj-triumph.onrender.com/")
             .then(response => response.json())
             .then(data => data)
     )
