@@ -11,13 +11,14 @@ const cors = corsModule.default;
 
 const app = express();
 app.use(cors());
+const q_RES = {}
 
 
 const connection = mysql2.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAM
 });
 
 // Connect once at startup
@@ -42,11 +43,12 @@ const exe_qu = (query, cb) => {
 
 
 app.get("/data", (req, res) => {
-    exe_qu("SELECT * FROM tr_data", (ERR, RES) => {
+    exe_qu("SELECT * FROM quotes", (ERR, RES) => {
         if (ERR) {
             return res.status(500).send("Failed to collect DATA.");
         }
-        res.json(RES);
+
+        res.send(JSON.stringify(RES));
     });
 });
 

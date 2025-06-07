@@ -1,12 +1,15 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import GET_DATA from './GET_DATA.jsx';
+import GET_DATA_Q from './GET_DATA_Q.jsx';
 
 function App() {
     const myRefs = useRef([]);
     const ref_empD = useRef(null);
     const [cloud_index, up_index] = useState(0);
+    const [q_index, up_qi] = useState(0);
     const [names_bikes, up_it] = useState([]);
+    const [quotes, up_q] = useState([]);
     const [data, up_data] = useState([]);
     const [filt, up_fil] = useState([]);
     const [toRemove, up_toRem] = useState([]);
@@ -26,6 +29,11 @@ function App() {
         });
     }, []);
 
+    GET_DATA_Q().then(data_got => {
+        up_q(data_got); // ✅ correct for string array
+    }, []);
+
+
     useEffect(() => {
         if (names_bikes.length === 0) return;
 
@@ -35,6 +43,16 @@ function App() {
 
         return () => clearInterval(interval); // cleanup
     }, [names_bikes.length]);
+
+    useEffect(() => {
+        if (quotes.length === 0) return;
+
+        const interval = setInterval(() => {
+            up_qi(q_index => (q_index + 1) % quotes.length);
+        }, 5000);
+
+        return () => clearInterval(interval); // cleanup
+    }, [quotes.length]);
 
     function OnC(e) {
         const res = filt.filter(item => item.Name.toLowerCase().includes(e.target.value.toLowerCase()));
@@ -133,7 +151,11 @@ function App() {
 
 
             </div>
+
             <div className={`Main_Con ${sh_all ? '' : 'MC_shrink'}`}>
+                <div className="Logo_Tr"></div>
+                <div className="qBox">{quotes.length > 0 ? quotes[q_index] : "Loading quote..."}</div>
+
                 <div className={`Cloud_Con ${showCloud ? 'FadeinDIV' : 'FadeoutDIV'}`}>
                     <div className="textBox">{names_bikes[cloud_index]}</div>
                     <div className="Data_Obj_Name">{itemObj_info.name ? itemObj_info.name.toUpperCase() : ''}</div>
@@ -144,6 +166,7 @@ function App() {
                 </div>
                 <div id="Search_Con" className={sh_all ? "show" : "hide"}>
                     <input
+                        placeholder="SEARCH HERE....."
                         id="Search_Con_i"
                         onChange={OnC}
                         onMouseEnter={() => {
@@ -165,7 +188,7 @@ function App() {
                                 <div className="Data_Obj_Name">{item.Name.toUpperCase()}</div>
                                 <div
                                     className="Data_Obj_Img"
-                                    style={{ backgroundImage: `url(${item.Image_urls})` }}
+                                    style={{backgroundImage: `url(${item.Image_urls})`}}
                                 ></div>
                                 <button className="BTN_moreInfo" onClick={() => {
                                     MI_exp(item);
