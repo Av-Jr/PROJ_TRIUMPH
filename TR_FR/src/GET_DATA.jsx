@@ -1,6 +1,6 @@
 function GET_DATA(){
     return(
-        fetch("http://localhost:4000/data")
+        fetch("/Data.json")
             .then(response => response.json())
             .then(data => data)
     )
