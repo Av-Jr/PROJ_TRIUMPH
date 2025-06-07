@@ -4,7 +4,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mysql2": "^3.14.1"
+    "fs": "^0.0.1-security",
+    "mysql2": "^3.14.1",
+    "path": "^0.12.7",
+    "paths": "^0.1.1",
+    "promises": "^0.2.5",
+    "url": "^0.11.4"
   },
   "scripts": {
     "start": "node index.js"
