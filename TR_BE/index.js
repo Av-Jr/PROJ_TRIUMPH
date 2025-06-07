@@ -1,4 +1,3 @@
-
 const mysql2 = await import("mysql2");
 const expressModule = await import("express");
 const corsModule = await import("cors");
@@ -11,6 +10,7 @@ const cors = corsModule.default;
 
 const app = express();
 app.use(cors());
+
 
 
 const connection = mysql2.createConnection({
@@ -49,6 +49,10 @@ app.get("/", (req, res) => {
         res.json(RES);
     });
 });
+
+app.get("/health", (req, res) => {
+    res.status(200).send("healthy");
+});    
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
