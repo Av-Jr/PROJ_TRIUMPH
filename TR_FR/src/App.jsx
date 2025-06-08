@@ -154,7 +154,7 @@ function App() {
 
             <div className={`Main_Con ${sh_all ? '' : 'MC_shrink'}`}>
                 <div className="Logo_Tr"></div>
-                <div className="qBox">{quotes.length > 0 ? quotes[q_index] : "Loading quote..."}</div>
+                <div className="qBox">'{quotes.length > 0 ? quotes[q_index] : "Loading quote..."}'</div>
 
                 <div className={`Cloud_Con ${showCloud ? 'FadeinDIV' : 'FadeoutDIV'}`}>
                     <div className="textBox">{names_bikes[cloud_index]}</div>
