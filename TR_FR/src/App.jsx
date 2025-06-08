@@ -4,6 +4,46 @@ import GET_DATA from './GET_DATA.jsx';
 import GET_DATA_Q from './GET_DATA_Q.jsx';
 
 function App() {
+    const getTriumphLink = (platform) => {
+        let url = "";
+        switch (platform) {
+            case 'w':
+                url = "https://www.triumphmotorcycles.in";
+                break;
+            case 'i':
+                url = "https://www.instagram.com/officialtriumph/";
+                break;
+            case 'tw':
+                url = "https://x.com/officialtriumph?lang=en";
+                break;
+            case 'yt':
+                url = "https://www.youtube.com/@OfficialTriumph";
+                break;
+            default:
+                url = "";
+        }
+        return url;
+    };
+
+    var open_l = (site) => {
+        var val = "";
+        switch(site){
+            case 'i' :
+                val = "www.instagram.com/aryanshvashishtha/";
+                break;
+
+            case 'l':
+                val = "www.linkedin.com/in/aryansh-vashishtha-772337213/";
+                break;
+            case 'g':
+                val="github.com/Av-Jr";
+                break;
+        }
+        var url = `https://${val}`;
+        return url;
+    }
+    const [showABTme, upABTme] = useState(false);
+    const [bike_an, upBikean] = useState(false);
     const myRefs = useRef([]);
     const ref_empD = useRef(null);
     const [cloud_index, up_index] = useState(0);
@@ -21,6 +61,7 @@ function App() {
         IU: null, Bio: null, ORP: null, ESP: null, wt: null
     });
 
+
     useEffect(() => {
         GET_DATA().then(data_got => {
             up_data(data_got);
@@ -30,7 +71,7 @@ function App() {
     }, []);
 
     GET_DATA_Q().then(data_got => {
-        up_q(data_got); // ✅ correct for string array
+        up_q(data_got);
     }, []);
 
 
@@ -99,6 +140,8 @@ function App() {
         });
     }
 
+
+
     return (
         <>
             <div
@@ -110,52 +153,72 @@ function App() {
                     <div className="label">Name</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.name}</div>
-
                     <div className="label">Engine</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.eng}</div>
-
                     <div className="label">Cooling System</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.CS}</div>
-
                     <div className="label">Braking System</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.BS}</div>
-
                     <div className="label">Fuel Type</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.FT}</div>
-
                     <div className="label">Weight</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.wt} KG</div>
-
                     <div className="label">Bio</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>{itemObj_info.Bio}</div>
-
                     <div className="label">On Road Price</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>RS {itemObj_info.ORP}</div>
-
                     <div className="label">Ex Showroom Price</div>
                     <div style={{textAlign: 'center'}}>:</div>
                     <div>RS {itemObj_info.ESP}</div>
                 </div>
-
                 <div
                     className="Data_Obj_Img_more"
                     style={{backgroundImage: `url(${itemObj_info.IU})`}}
                 ></div>
+            </div>
 
+            <div className={`cloudABTme ${showABTme ? "" : "hide"}`}>
+                <div className={"abtME_tb"}>About<br/>the<br/>Dev:</div>
+            </div>
 
+            <div className={showABTme ? "bike_bg" : "hide"}>
+                <div className={`tr_aboutme_transition ${bike_an ? "showABTmeAn" : "hideABTmeAn"}`}></div>
+            </div>
+            <div className="Socials" onMouseLeave={() => {
+                upBikean(false);
+                setTimeout(() => upABTme(false), 1000)
+            }} onMouseEnter={() => {
+                upBikean(true);
+                upABTme(true)
+            }
+            }>
+                <div className="So_AV" >AV</div>
+                <div className="Ex_So">
+                    <div className="So_Li" onClick={() => {window.open(open_l("l"), "_blank")}}></div>
+                    <div className="So_Gi" onClick={() => {window.open(open_l("g"), "_blank")}}></div>
+                    <div className="So_In" onClick={() => {window.open(open_l("i"), "_blank")}}></div>
+                </div>
             </div>
 
             <div className={`Main_Con ${sh_all ? '' : 'MC_shrink'}`}>
-                <div className="Logo_Tr"></div>
-                <div className="qBox">'{quotes.length > 0 ? quotes[q_index] : "Loading quote..."}'</div>
+                <div className="Logo_CON">
+                    <div className="Logo_Tr"></div>
+                    <div className="TR_Socials">
+                        <div className="tr_w" style={{backgroundImage : `url("/tr_logo_so.png")`}} onClick={() => window.open(getTriumphLink("w"), "_blank")}></div>
+                        <div className="tr_i" style={{backgroundImage : `url("/in_logo.png")`}} onClick={() => window.open(getTriumphLink("i"), "_blank")}></div>
+                        <div className="tr_tw" style={{backgroundImage : `url("/tw_logo_s.png")`}} onClick={() => window.open(getTriumphLink("tw"), "_blank")}></div>
+                        <div className="tr_yt" style={{backgroundImage : `url("/yt_logo_s.png")`}} onClick={() => window.open(getTriumphLink("yt"), "_blank")}></div>
+                    </div>
+                </div>
 
+                <div className="qBox">'{quotes.length > 0 ? quotes[q_index] : "Loading quote..."}'</div>
                 <div className={`Cloud_Con ${showCloud ? 'FadeinDIV' : 'FadeoutDIV'}`}>
                     <div className="textBox">{names_bikes[cloud_index]}</div>
                     <div className="Data_Obj_Name">{itemObj_info.name ? itemObj_info.name.toUpperCase() : ''}</div>
