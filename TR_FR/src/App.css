@@ -56,9 +56,12 @@ body{
   width : 150px;
   height : 150px;
   position : absolute;
-  left : 62%;
-  top : -2%;
+  right : 10%;
+  top : 12%;
   z-index : 1000;
+  display : grid;
+  justify-content : center;
+  text-align : center;
 }
 
 .textBox{
