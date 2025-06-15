@@ -1,20 +1,21 @@
 {
-  "name": "tr-in",
+  "name": "PROJ_TRIUMPH",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "../node_modules/.bin/vite",
+    "build": "../node_modules/.bin/vite build",
+    "lint": "../node_modules/.bin/eslint .",
+    "preview": "../node_modules/.bin/vite preview"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mysql2": "^3.14.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

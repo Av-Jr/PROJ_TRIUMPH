@@ -2,8 +2,12 @@ import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import GET_DATA from './GET_DATA.jsx';
 import GET_DATA_Q from './GET_DATA_Q.jsx';
+import {useNavigate} from 'react-router-dom';
+const verification_url = import.meta.env.VITE_API_verification_url;
+
 
 function App() {
+    const navigate = useNavigate();
     const getTriumphLink = (platform) => {
         let url = "";
         switch (platform) {
@@ -25,8 +29,8 @@ function App() {
         return url;
     };
 
-    var open_l = (site) => {
-        var val = "";
+    const open_l = (site) => {
+        let val = "";
         switch(site){
             case 'i' :
                 val = "www.instagram.com/aryanshvashishtha/";
@@ -39,9 +43,10 @@ function App() {
                 val="github.com/Av-Jr";
                 break;
         }
-        var url = `https://${val}`;
+        let url = `https://${val}`;
         return url;
     }
+
     const [showABTme, upABTme] = useState(false);
     const [bike_an, upBikean] = useState(false);
     const myRefs = useRef([]);
@@ -60,6 +65,31 @@ function App() {
         name: null, eng: null, CS: null, BS: null, FT: null,
         IU: null, Bio: null, ORP: null, ESP: null, wt: null
     });
+    const [btn_name, up_btnname] = useState('LOGIN');
+    const [show_logInfo, up_logInfo] = useState(false);
+
+    useEffect(() => {
+        const counter = setInterval(() =>{
+            const saved_tok = localStorage.getItem("Saved_Token");
+            if(saved_tok){
+                fetch(verification_url, {
+                    method : "POST",
+                    headers : {"Authorization" : `Bearer ${saved_tok}`}
+                })
+                    .then(res => {
+                        if(res.status === 200){
+                            res.json().then(data => {
+                                up_btnname(data.token_info.name);
+                            })
+                        }
+                        else{
+                            up_btnname("LOGIN");
+                        }
+                    })
+            }
+        }, 2000)
+        return () => clearInterval(counter);
+    }, [])
 
 
     useEffect(() => {
@@ -82,7 +112,7 @@ function App() {
             up_index(prev => (prev + 1) % names_bikes.length);
         }, 2000);
 
-        return () => clearInterval(interval); // cleanup
+        return () => clearInterval(interval);
     }, [names_bikes.length]);
 
     useEffect(() => {
@@ -92,7 +122,7 @@ function App() {
             up_qi(q_index => (q_index + 1) % quotes.length);
         }, 5000);
 
-        return () => clearInterval(interval); // cleanup
+        return () => clearInterval(interval);
     }, [quotes.length]);
 
     function OnC(e) {
@@ -103,7 +133,7 @@ function App() {
         setTimeout(() => {
             up_data(res);
             up_toRem([]);
-        }, 1000); // ⬅ fixed: replaced setInterval with setTimeout
+        }, 1000);
     }
 
     const MI_exp = (item_obj) => {
@@ -140,7 +170,33 @@ function App() {
         });
     }
 
-
+    const login_func = (e) => {
+        e.preventDefault();
+        console.log("btn clicked");
+        const saved_token = localStorage.getItem("Saved_Token");
+        if(!saved_token){
+            setTimeout(() => {navigate("/login")}, 100);
+        }
+        else if(saved_token){
+            fetch(verification_url, {
+                method : "POST",
+                headers : {"Authorization" : `Bearer ${saved_token}`}
+            })
+                .then(res => {
+                    if(res.status === 401){
+                        alert("User Login Expired..Please Login Again.");
+                        localStorage.removeItem("Saved_Token");
+                        navigate("/login");
+                    }
+                    else if(res.status !== 200){
+                        res.text().then(msg => alert(msg));
+                    }
+                    else{
+                            res.json().then(data => {up_btnname(data.token_info.name)})
+                    }
+                })
+        }
+    }
 
     return (
         <>
@@ -206,6 +262,9 @@ function App() {
                     <div className="So_In" onClick={() => {window.open(open_l("i"), "_blank")}}></div>
                 </div>
             </div>
+
+            <button className="LI_btn" onClick={login_func} onMouseEnter={btn_name === "LOGIN" ? null : () => {up_logInfo(true)}} onMouseLeave={() => {up_logInfo(false)}}>{btn_name}</button>
+            <div className={`LOGIN_INFO ${show_logInfo ? "show" : ""}`}>USER : {btn_name}</div>
 
             <div className={`Main_Con ${sh_all ? '' : 'MC_shrink'}`}>
                 <div className="Logo_CON">

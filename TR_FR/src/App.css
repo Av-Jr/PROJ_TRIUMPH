@@ -49,7 +49,7 @@ body{
 }
 
 .Cloud_Con{
-  background : url("../src/assets/idea_cloud.gif") no-repeat center;
+  background : url("./assets/idea_cloud.gif") no-repeat center;
   opacity : 0;
   transition : opacity 1s ease;
   background-size : contain;
@@ -231,7 +231,7 @@ body{
 }
 
 .Logo_Tr{
-  background-image : url("../src/assets/tr_logo.png");
+  background-image : url("./assets/tr_logo.png");
   background-repeat : no-repeat;
   width : 170px;
   height : 50px;
@@ -348,7 +348,7 @@ body{
   position : absolute;
   top : 2%;
   left : 2%;
-  background-image : url("../public/tr_aboutme.png");
+  background-image : url("/tr_aboutme.png");
   background-size : cover;
   perspective : 1000px;
   transform-style: preserve-3d;
@@ -419,10 +419,11 @@ body{
   padding : 2px;
 }
 
+
 .cloudABTme{
   width : 100px;
   height : 100px;
-  background-image : url("../public/abt_Dev.png");
+  background-image : url("/abt_Dev.png");
   background-size : cover;
   background-color : rgba(255, 255, 255, 0.1);
   background-position : center;
@@ -452,6 +453,7 @@ body{
 .hideABTmeAn{
   animation : exit 6s ease forwards;
 }
+
 @keyframes approach {
   0% {
     transform: translateZ(-500px) scale(0.2) translateX(200px) translateY(10px);
@@ -474,3 +476,69 @@ body{
   }
 }
 
+.Login_BOX{
+  width : 250px;
+  height : 100px;
+  background : rgba(255, 255, 255, 0.2);
+  backdrop-filter : blur(80px);
+  border-radius : 16px;
+  position : absolute;
+  top : 20%;
+  left : 30%;
+  overflow : hidden;
+}
+
+.Login_BOX input{
+  position : relative;
+  margin : 8px;
+  padding : 1px;
+  top : 100%;
+  border-radius : 5px;
+  border-color : rgba(67,192,192,255);
+  transition : border-color 1s ease;
+}
+
+.Login_BOX button{
+  position : fixed;
+  top : 67%;
+  right : 2%;
+}
+
+.Login_BOX input:hover{
+  border-color : brown;
+}
+
+.Login_BOX input:focus{
+  border-color : brown;
+}
+
+.Login_BOX button:hover{
+  border-color : brown;
+}
+
+.LOGIN_INFO{
+  width : 100px;
+  height : 20px;
+  background : purple;
+  position : absolute;
+  top : 48%;
+  left : 4%;
+  font-size : 12px;
+  display : grid;
+  align-items : center;
+  margin : 2px;
+  border-radius : 8px;
+  background : rgba(255, 255, 255, 0.2);
+  backdrop-filter : blur(80px);
+  visibility : hidden;
+}
+
+.LI_btn{
+  position : absolute;
+  top : 45.5%;
+  left : 4%;
+}
+
+.show{
+  visibility : visible;
+}

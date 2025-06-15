@@ -1,58 +1,50 @@
+const exp = require("express");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
-const mysql2 = await import("mysql2");
-const expressModule = await import("express");
-const corsModule = await import("cors");
-import dotenv from 'dotenv';
-dotenv.config();
+const secKey = process.env.secKey;
+const PoRt = process.env.port;
+const app = exp();
 
-
-const express = expressModule.default;
-const cors = corsModule.default;
-
-const app = express();
 app.use(cors());
-const q_RES = {}
+app.use(exp.json());
 
+// Login Check Route
+app.post('/logincheck', (req, res) => {
+    const name = req.body.un;
+    const pw = req.body.pw;
 
-const connection = mysql2.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAM
-});
-
-// Connect once at startup
-connection.connect(err => {
-    if (err) {
-        console.error("DB connection failed:", err);
-        process.exit(1);
+    if (name === "admin" && pw === "admin") {
+        const token = jwt.sign({ name: "admin", pw: "admin" }, secKey, { expiresIn: "1m" });
+        return res.status(200).json({sent_token : token});
     }
-    console.log("DB connected successfully");
+
+    res.status(401).send("Invalid credentials");
 });
 
-const exe_qu = (query, cb) => {
-    connection.query(query, (error, result) => {
-        if (error) {
-            console.error("DB query error:", error);  // <--- add this
-            cb(error, null);
-            return;
-        }
-        cb(null, result);
-    });
-};
+// Token Verify Route
+app.post("/verify", (req, res) => {
+    const auth = req.headers.authorization;
 
+    if (!auth) {
+        return res.status(400).send("Auth Header Missing");
+    }
 
-app.get("/data", (req, res) => {
-    exe_qu("SELECT * FROM quotes", (ERR, RES) => {
-        if (ERR) {
-            return res.status(500).send("Failed to collect DATA.");
-        }
+    const sent_token = auth.split(" ")[1];
+    if (!sent_token) {
+        return res.status(400).send("Token missing in auth header");
+    }
 
-        res.send(JSON.stringify(RES));
-    });
+    try {
+        const token_info = jwt.verify(sent_token, secKey);
+        res.status(200).json({token_info});
+    } catch {
+        res.status(401).send("Invalid token");
+    }
 });
 
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+// Server Start
+app.listen(PoRt, () => {
+    console.log(`Server running at port ${PoRt}`);
 });
