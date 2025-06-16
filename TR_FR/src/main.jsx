@@ -3,10 +3,20 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import {BrowserRouter} from 'react-router-dom'
 import BrRouter from './BrRouter.jsx'
+import {BrowserView, MobileView} from 'react-detect-device'
+import MobilePage from './MobilePage.jsx';
 
 
 createRoot(document.getElementById('root')).render(
-<BrowserRouter>
-    <BrRouter/>
-</BrowserRouter>
+    <>
+        <BrowserView>
+            <BrowserRouter>
+                <BrRouter/>
+            </BrowserRouter>
+        </BrowserView>
+
+        <MobileView>
+            <MobilePage></MobilePage>
+        </MobileView>
+    </>
 )
