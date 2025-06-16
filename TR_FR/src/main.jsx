@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import {BrowserRouter} from 'react-router-dom'
 import BrRouter from './BrRouter.jsx'
-import {BrowserView, MobileView} from 'react-detect-device'
+import {BrowserView, MobileView} from 'react-device-detect'
 import MobilePage from './MobilePage.jsx';
 
 
