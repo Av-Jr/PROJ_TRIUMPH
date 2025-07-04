@@ -192,7 +192,7 @@ function App() {
                         res.text().then(msg => alert(msg));
                     }
                     else{
-                            res.json().then(data => {up_btnname(data.token_info.name)})
+                        res.json().then(data => {up_btnname(data.token_info.name)})
                     }
                 })
         }
@@ -266,17 +266,17 @@ function App() {
             <button className="LI_btn" onClick={login_func} onMouseEnter={btn_name === "LOGIN" ? null : () => {up_logInfo(true)}} onMouseLeave={() => {up_logInfo(false)}}>{btn_name}</button>
             <div className={`LOGIN_INFO ${show_logInfo ? "show" : ""}`}>USER : {btn_name}</div>
 
-            <div className={`Main_Con ${sh_all ? '' : 'MC_shrink'}`}>
-                <div className="Logo_CON">
-                    <div className="Logo_Tr"></div>
-                    <div className="TR_Socials">
-                        <div className="tr_w" style={{backgroundImage : `url("/tr_logo_so.png")`}} onClick={() => window.open(getTriumphLink("w"), "_blank")}></div>
-                        <div className="tr_i" style={{backgroundImage : `url("/in_logo.png")`}} onClick={() => window.open(getTriumphLink("i"), "_blank")}></div>
-                        <div className="tr_tw" style={{backgroundImage : `url("/tw_logo_s.png")`}} onClick={() => window.open(getTriumphLink("tw"), "_blank")}></div>
-                        <div className="tr_yt" style={{backgroundImage : `url("/yt_logo_s.png")`}} onClick={() => window.open(getTriumphLink("yt"), "_blank")}></div>
-                    </div>
+            <div className="Logo_CON">
+                <div className="Logo_Tr"></div>
+                <div className="TR_Socials">
+                    <div className="tr_w" style={{backgroundImage : `url("/tr_logo_so.png")`}} onClick={() => window.open(getTriumphLink("w"), "_blank")}></div>
+                    <div className="tr_i" style={{backgroundImage : `url("/in_logo.png")`}} onClick={() => window.open(getTriumphLink("i"), "_blank")}></div>
+                    <div className="tr_tw" style={{backgroundImage : `url("/tw_logo_s.png")`}} onClick={() => window.open(getTriumphLink("tw"), "_blank")}></div>
+                    <div className="tr_yt" style={{backgroundImage : `url("/yt_logo_s.png")`}} onClick={() => window.open(getTriumphLink("yt"), "_blank")}></div>
                 </div>
+            </div>
 
+            <div className={`Main_Con ${sh_all ? '' : 'MC_shrink'}`}>
                 <div className="qBox">'{quotes.length > 0 ? quotes[q_index] : "Loading quote..."}'</div>
                 <div className={`Cloud_Con ${showCloud ? 'FadeinDIV' : 'FadeoutDIV'}`}>
                     <div className="textBox">{names_bikes[cloud_index]}</div>
@@ -288,7 +288,7 @@ function App() {
                 </div>
                 <div id="Search_Con" className={sh_all ? "show" : "hide"}>
                     <input
-                        placeholder="SEARCH HERE....."
+                        placeholder="   Search For Bikes Here...."
                         id="Search_Con_i"
                         onChange={OnC}
                         onMouseEnter={() => {
@@ -307,16 +307,18 @@ function App() {
                                 key={item.Name}
                                 ref={data => (myRefs.current[item.Name] = data)}
                             >
-                                <div className="Data_Obj_Name">{item.Name.toUpperCase()}</div>
+                                <div className="Data_Obj_Name">{item.Name}</div>
                                 <div
                                     className="Data_Obj_Img"
                                     style={{backgroundImage: `url(${item.Image_urls})`}}
                                 ></div>
-                                <button className="BTN_moreInfo" onClick={() => {
+                                <div className="BTN_moreInfo" onClick={() => {
                                     MI_exp(item);
                                 }}>
-                                    MORE
-                                </button>
+                                    <div className="top_line"></div>
+                                    <div className="bottom_line"></div>
+                                    <div className="boxInfo">More Info</div>
+                                </div>
                             </div>
                         ))
                     }
