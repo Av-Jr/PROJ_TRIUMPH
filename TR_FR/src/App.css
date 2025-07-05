@@ -555,18 +555,18 @@ body{
 }
 
 .So_Li {
-  background: url("./Li_logo.png");
+  background: url("./assets/Li_logo.png");
   background-size: cover;
   background-position: -5px
 }
 
 .So_Gi{
-  background : url("./Gi_logo.png");
+  background : url("./assets/Gi_logo.png");
   background-size : cover;
 }
 
 .So_In{
-  background : url("./in_logo.png");
+  background : url("./assets/in_logo.png");
   background-size : cover;
 }
 
