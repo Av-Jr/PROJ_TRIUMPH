@@ -121,8 +121,8 @@ body{
 .Data_Obj_Img_more{
   position : absolute;
   background : no-repeat center;
-  width : 400px;
-  height : 240px;
+  width : 30vw;
+  aspect-ratio : 4/2;
   background-size : cover;
   right : 0;
   top : 0;
@@ -177,15 +177,17 @@ body{
 }
 
 .emptyCon{
-  width : 50px;
-  height : 50px;
-  position : absolute;
+  width : 62vw;
+  height : 65vh;
+
   z-index : 1000;
   transition : width 2s ease, visibility 2s ease, opacity 2s ease, height 2s ease, transform 2s ease;
   visibility : hidden;
   opacity: 0;
-  top:10%;
-  left : 40%;
+  position : absolute;
+  top : 13%;
+  left : 35%;
+  overflow : scroll;
 }
 
 .MC_shrink{
@@ -199,8 +201,8 @@ body{
 .DI_exp{
   visibility : visible;
   opacity : 1;
-  width : 900px;
-  height : 650px;
+  width : 62vw;
+  height : 75vh;
   position : absolute;
   background-color : rgba(255, 255, 255, 0.1);
   backdrop-filter : blur(5px);
@@ -220,17 +222,15 @@ body{
   font-size: 17px;
   align-items: start;
   position : relative;
-  top : 30%;
-  left : 20%;
+  top : 15%;
+  left : 0;
   backdrop-filter : blur(150px);
-  width : 500px;
-  padding : 20px;
+  width : 62vw;
+  height : 60vh;
   background : rgba(255, 255, 255, 0.1);
   border-radius : 20px;
   font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
   font-style: normal;
-
 }
 
 .label {
